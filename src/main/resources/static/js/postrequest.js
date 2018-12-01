@@ -1,5 +1,5 @@
 $(document).ready( () => {
-    $("#btnSubmit").click((event) => {
+    $("#realtorSubmit").click((event) => {
     //stop submit the form, we will post it manually.
     event.preventDefault();
 doAjax();
@@ -16,13 +16,11 @@ function doAjax() {
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: "/api/file/upload",
+        url: "/main",
         data: data,
         processData: false, //prevent jQuery from automatically transforming the data into a query string
         contentType: false,
-        cache: false,
-        success: (data) => {
-        $("#listFiles").text(data);
+        cache: false
 },
     error: (e) => {
         $("#listFiles").text(e.responseText);

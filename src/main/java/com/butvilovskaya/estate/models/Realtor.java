@@ -1,10 +1,8 @@
 package com.butvilovskaya.estate.models;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
-import java.sql.Blob;
-import java.util.Set;
 
 @Entity
 @Table(name = "REALTOR")
@@ -19,16 +17,27 @@ public class Realtor {
 
     private String contact;
 
-    @Transient
-    private MultipartFile userImage;
+    @Column(name = "namepic")
+    @JsonView(View.FileInfo.class)
+    private String namepic;
+
+    @Column(name = "mimetype")
+    private String mimetype;
+
+    @Lob
+    @Column(name="pic")
+    private byte[] pic;
 
     public Realtor() {
     }
 
-    public Realtor(String name, String agency, String contact) {
+    public Realtor(String name, String agency, String contact, String namepic, String mimetype, byte[] pic) {
         this.name = name;
         this.agency = agency;
         this.contact = contact;
+        this.namepic = namepic;
+        this.mimetype = mimetype;
+        this.pic = pic;
     }
 
     public Integer getId() {
@@ -63,11 +72,28 @@ public class Realtor {
         this.contact = contact;
     }
 
-    public MultipartFile getUserImage() {
-        return userImage;
+    public String getNamepic() {
+        return namepic;
     }
-    public void setUserImage(MultipartFile userImage) {
-        this.userImage = userImage;
+
+    public void setNamepic(String namepic) {
+        this.namepic = namepic;
+    }
+
+    public String getMimetype() {
+        return mimetype;
+    }
+
+    public void setMimetype(String mimetype) {
+        this.mimetype = mimetype;
+    }
+
+    public byte[] getPic() {
+        return pic;
+    }
+
+    public void setPic(byte[] pic) {
+        this.pic = pic;
     }
 }
 
