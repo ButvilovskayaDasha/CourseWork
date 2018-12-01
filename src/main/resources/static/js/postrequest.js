@@ -1,29 +1,24 @@
-$(document).ready( () => {
-    $("#realtorSubmit").click((event) => {
-    //stop submit the form, we will post it manually.
+$(document).ready(() => {
+  $('#realtorSubmit').click((event) => {
     event.preventDefault();
-doAjax();
+    doAjax();
+  });
 });
 
-});
+function doAjax () {
+  var form = $('#fileUploadForm')[0];
+  var data = new FormData(form);
 
-function doAjax() {
-
-    // Get form
-    var form = $('#fileUploadForm')[0];
-    var data = new FormData(form);
-
-    $.ajax({
-        type: "POST",
-        enctype: 'multipart/form-data',
-        url: "/main",
-        data: data,
-        processData: false, //prevent jQuery from automatically transforming the data into a query string
-        contentType: false,
-        cache: false
-},
-    error: (e) => {
-        $("#listFiles").text(e.responseText);
+  $.ajax({
+    type: 'POST',
+    enctype: 'multipart/form-data',
+    url: '/main',
+    data: data,
+    processData: false,
+    contentType: false,
+    cache: false,
+    error: (error) => {
+      console.error(error);
     }
-});
+  });
 }
