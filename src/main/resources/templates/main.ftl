@@ -1,42 +1,59 @@
 <#import "parts/common.ftl" as c>
-<#import "parts/login.ftl" as l>
-<@c.page>
-    <div>
-<@l.logout>
 
-</@l.logout>
-    <span><a href="/user">User List</a> </span>
+<@c.page>
+    <div class="form-row">
+    <div class="form-group col-md-6">
+    <form method="get" action="/main" class="form-inline">
+    <input type="text" class="form-control" name="filter" value="${filter?ifExists}" placeholder="Search by Name">
+    <button type="submit" class="btn btn-primary ml-2">Search</button>
+    </form>
     </div>
-    <div>
-        <form method="post" enctype="multipart/form-data">
-            <input type="text" name="name" placeholder="Enter Name"/>
-            <input type="text" name="agency" placeholder="Enter Agency"/>
-            <input type="text" name="contact" placeholder="Enter Contact"/>
-            <input type="file" name="file">
-            <button type="button" id="btnGetFiles">Files</button>
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <button id="realtorSubmit" type="submit">Add</button>
-        </form>
+    </div>
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Add new user
+    </a>
+    <div class="collapse" id="collapseExample">
+    <div class="form-group mt-3">
+    <form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="text" name="name" class="form-control" placeholder="Enter Name"/>
+    </div>
+    <div class="form-group">
+        <input type="text" name="agency" class="form-control" placeholder="Enter Agency"/>
+    </div>
+    <div class="form-group">
+        <input type="text" name="contact" class="form-control" placeholder="Enter Contact"/>
+    </div>
+    <div class="form-group">
+        <div class="custom-file">
+            <input type="file" name="file" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+    </div>
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+    </form>
+    </div>
     </div>
     <div id="listFiles">
     </div>
-    <div>Список пользователей</div>
-    <form method="get" action="/main">
-        <input type="text" name="filter" value="${filter?ifExists}">
-        <button type="submit">Find</button>
-    </form>
+    <div class="card-columns">
     <#list realtor as realtor>
-    <div>
-        <b>${realtor.name}</b>
+    <div class="card my-3">
+    ${realtor.name}
         <span>${realtor.agency}</span>
         <i>${realtor.contact}</i>
-    <div>
+    </div>
+        <div>
         <#if realtor.filename??>
-            <img src="/img/${realtor.filename}"
+            <img class="card-img-top" src="/img/${realtor.filename}"
         </#if>
-    </div>
-    </div>
+        </div>
+        </div>
     <#else>
-    No realtors
-</#list>
+        No realtors
+    </#list>
+    </div>
 </@c.page>
