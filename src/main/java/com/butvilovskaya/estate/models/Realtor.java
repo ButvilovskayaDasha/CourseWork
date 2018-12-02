@@ -11,6 +11,16 @@ public class Realtor {
     private String name;
     private String agency;
     private String contact;
+    private String filename;
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
     public Realtor() {
     }
     public Realtor(String name, String agency, String contact) {
