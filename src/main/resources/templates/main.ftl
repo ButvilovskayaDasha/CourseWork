@@ -9,7 +9,8 @@
     </form>
     </div>
     </div>
-    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
         Add new user
     </a>
     <div class="collapse" id="collapseExample">
@@ -37,20 +38,19 @@
     </form>
     </div>
     </div>
-    <div id="listFiles">
-    </div>
-    <div class="card-columns">
+    <div class="cardsWrapper">
     <#list realtor as realtor>
-    <div class="card my-3">
-    ${realtor.name}
-        <span>${realtor.agency}</span>
-        <i>${realtor.contact}</i>
-    </div>
-        <div>
+        <div class="realtorCard">
+        <div class="realtorInfo">
+        <div>${realtor.name}</div>
+        <div>${realtor.agency}</div>
+        <div>${realtor.contact}</div>
+
         <#if realtor.filename??>
-            <img class="card-img-top" src="/img/${realtor.filename}"
+            <img alt="img" class="realtorImage" src="/img/${realtor.filename}"
         </#if>
-        </div>
+    </div>
+    </div>
         </div>
     <#else>
         No realtors
